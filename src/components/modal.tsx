@@ -1,15 +1,13 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Dispatch, Fragment, SetStateAction, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 type ModalProps = {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 };
 const Modal: React.FC<ModalProps> = ({ isOpen, setIsOpen }) => {
-  const closeModal = () => {
-    setIsOpen(false);
-  };
-
+  const navigate = useNavigate();
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
@@ -104,7 +102,10 @@ const Modal: React.FC<ModalProps> = ({ isOpen, setIsOpen }) => {
                       </h1>
 
                       <div className="flex justify-between mt-3 item-center space-x-4 absolute bottom-0">
-                        <button className="w-full px-10 py-2 text-xs font-bold text-white uppercase transition-colors duration-200 transform bg-primary rounded  hover:bg-primary_shade  focus:outline-none focus:bg-primary">
+                        <button
+                          className="w-full px-10 py-2 text-xs font-bold text-white uppercase transition-colors duration-200 transform bg-primary rounded  hover:bg-primary_shade  focus:outline-none focus:bg-primary"
+                          onClick={() => navigate("/edit")}
+                        >
                           Edit
                         </button>
                         <button className="w-1/2 px-8 py-2 text-xs font-bold text-primary border border-primary uppercase transition-colors duration-200 transform bg-white rounded hover:bg-grey-100 hover:text-primary_shade  focus:outline-none focus:bg-white">
