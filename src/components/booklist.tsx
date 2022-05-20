@@ -2,10 +2,10 @@ const BookList = () => {
   return (
     <div className="space-y-4">
       <div className="w-full ">
-        <div className="grid grid-cols-5 gap-4 ">
+        <div className="grid grid-cols-6 gap-4 ">
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((index) => (
             <div
-              className="flex flex-col items-center  w-4/5 mx-auto transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300"
+              className="flex flex-col items-center w-4/5 mx-auto transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300"
               key={index}
             >
               <img

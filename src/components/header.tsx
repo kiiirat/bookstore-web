@@ -1,6 +1,8 @@
 import logo from "assets/images/logo.png";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
   return (
     <nav className="bg-white px-4">
       <div className="flex justify-between mx-auto">
@@ -34,7 +36,10 @@ const Header = () => {
         </div>
 
         <div className="flex items-center space-x-4">
-          <button className="flex items-center px-2 py-1 text-white bg-primary rounded-md hover:bg-primary_shade focus:outline-none ">
+          <button
+            className="flex items-center px-2 py-1 text-white bg-primary rounded-md hover:bg-primary_shade focus:outline-none "
+            onClick={() => navigate("/new")}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
