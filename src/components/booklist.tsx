@@ -1,4 +1,8 @@
+import { useState } from "react";
+import Modal from "./modal";
+
 const BookList = () => {
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="space-y-4">
       <div className="w-full ">
@@ -7,6 +11,7 @@ const BookList = () => {
             <div
               className="flex flex-col items-center w-4/5 mx-auto transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300"
               key={index}
+              onClick={() => setIsOpen(true)}
             >
               <img
                 className="w-full rounded h-60"
@@ -111,6 +116,7 @@ const BookList = () => {
           </li>
         </ul>
       </nav>
+      <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
     </div>
   );
 };
