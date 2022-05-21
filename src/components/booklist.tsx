@@ -15,15 +15,29 @@ export type Book = {
 
 type BookListProps = {
   books: Book[] | undefined;
+  setTake: React.Dispatch<React.SetStateAction<number>>;
+  take: number;
+  pages: number;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
+  page: number;
 };
 
-const BookList: React.FC<BookListProps> = ({ books }) => {
+const BookList: React.FC<BookListProps> = ({ books, pages, setPage, page }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [book, setBook] = useState<Book>();
   const handleViewBook = (bookId: number) => {
     const book = books?.find((book) => book.id === bookId);
     setBook(book);
     setIsOpen(true);
+  };
+
+  const paginationList = () => {
+    let arr = [];
+    for (let a = 0; a < pages; a++) {
+      arr.push(a + 1);
+    }
+
+    return arr;
   };
 
   return (
@@ -57,9 +71,13 @@ const BookList: React.FC<BookListProps> = ({ books }) => {
       >
         <ul className="inline-flex items-center -space-x-px">
           <li>
-            <a
-              href="/"
-              className="block py-2 px-3 ml-0 leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            <button
+              className="block py-2 px-3 ml-0 leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 "
+              onClick={() => {
+                if (page !== 1) {
+                  setPage(page - 1);
+                }
+              }}
             >
               <span className="sr-only">Previous</span>
               <svg
@@ -74,53 +92,31 @@ const BookList: React.FC<BookListProps> = ({ books }) => {
                   clipRule="evenodd"
                 ></path>
               </svg>
-            </a>
+            </button>
           </li>
+          {paginationList().map((currentPage, index) => (
+            <li key={index}>
+              <button
+                onClick={() => setPage(currentPage)}
+                aria-current="page"
+                className={`z-10 py-2 px-3 leading-tight ${
+                  currentPage === page
+                    ? "text-primary bg-orange-100 border border-orange-300 hover:bg-blue-100"
+                    : "text-gray-500 bg-white border border-gray-300"
+                } `}
+              >
+                {currentPage}
+              </button>
+            </li>
+          ))}
           <li>
-            <a
-              href="/"
-              className="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-            >
-              1
-            </a>
-          </li>
-          <li>
-            <a
-              href="/"
-              className="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-            >
-              2
-            </a>
-          </li>
-          <li>
-            <a
-              href="/"
-              aria-current="page"
-              className="z-10 py-2 px-3 leading-tight text-primary bg-orange-100 border border-orange-300 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
-            >
-              3
-            </a>
-          </li>
-          <li>
-            <a
-              href="/"
-              className="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-            >
-              4
-            </a>
-          </li>
-          <li>
-            <a
-              href="/"
-              className="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-            >
-              5
-            </a>
-          </li>
-          <li>
-            <a
-              href="/"
-              className="block py-2 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            <button
+              className="block py-2 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 "
+              onClick={() => {
+                if (page !== pages) {
+                  setPage(page + 1);
+                }
+              }}
             >
               <span className="sr-only">Next</span>
               <svg
@@ -135,7 +131,7 @@ const BookList: React.FC<BookListProps> = ({ books }) => {
                   clipRule="evenodd"
                 ></path>
               </svg>
-            </a>
+            </button>
           </li>
         </ul>
       </nav>

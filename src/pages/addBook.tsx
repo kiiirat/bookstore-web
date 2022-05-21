@@ -1,4 +1,8 @@
-import { BookCreateInput, useCreateBookMutation } from "generated/graphql";
+import {
+  BookCreateInput,
+  PaginatedBooksDocument,
+  useCreateBookMutation,
+} from "generated/graphql";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -20,6 +24,7 @@ const AddBook = () => {
     onCompleted: () => {
       navigate("/", { replace: true });
     },
+    refetchQueries: [PaginatedBooksDocument],
   });
 
   const onSubmit = handleSubmit(async (formData, event) => {

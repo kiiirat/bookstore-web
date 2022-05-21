@@ -1,12 +1,15 @@
-query Books {
-  books {
-    id
-    title
-    author
-    price
-    imageUrl
-    stock
-    createdAt
-    updatedAt
+query PaginatedBooks($page: Float!, $take: Float!) {
+  paginatedBooks(page: $page, take: $take) {
+    list {
+      id
+      title
+      author
+      price
+      imageUrl
+      stock
+      createdAt
+      updatedAt
+    }
+    pages
   }
 }
