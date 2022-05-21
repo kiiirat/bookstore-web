@@ -113,6 +113,7 @@ const BookList: React.FC<BookListProps> = ({ books, pages, setPage, page }) => {
             <button
               className="block py-2 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 "
               onClick={() => {
+                console.log(page, pages);
                 if (page !== pages) {
                   setPage(page + 1);
                 }

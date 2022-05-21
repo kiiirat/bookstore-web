@@ -13,7 +13,7 @@ const Header = () => {
     <nav className="bg-white px-4">
       <div className="flex justify-between mx-auto">
         <div className="flex justify-between items-center">
-          {location.pathname !== "/new" && !location.pathname.includes("edit") && (
+          {/* {location.pathname !== "/new" && !location.pathname.includes("edit") && (
             <div className="relative">
               <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                 <svg
@@ -37,16 +37,10 @@ const Header = () => {
                 placeholder="Search a book"
               />
             </div>
-          )}
-        </div>
-        <div className="flex items-center">
-          <img src={logo} alt="" className="h-6" />
-        </div>
-
-        <div className="flex items-center space-x-4">
+          )} */}
           {location.pathname !== "/new" && !location.pathname.includes("edit") && (
             <button
-              className="flex items-center px-2 py-1 text-white bg-primary rounded-md hover:bg-primary_shade focus:outline-none "
+              className="flex items-center px-2 py-1 ml-2 text-white bg-primary rounded-md hover:bg-primary_shade focus:outline-none "
               onClick={() => navigate("/new")}
             >
               <svg
@@ -64,10 +58,15 @@ const Header = () => {
               <span className="mx-1">Add Book</span>
             </button>
           )}
+        </div>
+        <div className="flex items-center">
+          <img src={logo} alt="" className="h-6" />
+        </div>
 
+        <div className="flex items-center space-x-4">
           <button
             type="button"
-            className="flex items-center px-2 py-1 text-primary border border-primary bg-white rounded-md hover:bg-primary_shade focus:outline-none hover:text-white "
+            className="flex items-center px-2 py-1 mr-2 text-primary border border-primary bg-white rounded-md hover:bg-primary_shade focus:outline-none hover:text-white "
             aria-label="toggle profile dropdown"
             onClick={() => handleLogout()}
           >
@@ -84,9 +83,6 @@ const Header = () => {
               />
             </svg>
             <span className="mx-1">Logout</span>
-            {/* <div className="w-12 mr-2 h-12 overflow-hidden border-2 border-primary rounded-full flex items-center justify-center">
-              <p className="text-primary">JO</p>
-            </div> */}
           </button>
         </div>
       </div>

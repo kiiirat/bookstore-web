@@ -33,7 +33,7 @@ const AddBook = () => {
     try {
       uploadImage = await CloudinaryUpload(bookImage);
       formData.imageUrl = uploadImage;
-      await createBookMutation({
+      createBookMutation({
         variables: {
           data: {
             ...formData,
