@@ -1,9 +1,6 @@
-import Header from "components/header";
-
 const AddBook = () => {
   return (
     <div className="p-4 h-screen">
-      <Header />
       <div className="flex flex-col w-full items-center mt-40">
         <div className="px-6 w-1/2  ">
           <div className="bg-white rounded-lg border border-gray-300 ">
