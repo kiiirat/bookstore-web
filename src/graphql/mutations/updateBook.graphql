@@ -1,0 +1,10 @@
+mutation UpdateBook($data: BookUpdateInput!, $where: BookWhereUniqueInput!) {
+  updateBook(data: $data, where: $where) {
+    id
+    title
+    author
+    price
+    imageUrl
+    stock
+  }
+}

@@ -1,0 +1,10 @@
+mutation DeleteBook($where: BookWhereUniqueInput!) {
+  deleteBook(where: $where) {
+    id
+    title
+    author
+    price
+    imageUrl
+    stock
+  }
+}
