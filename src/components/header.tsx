@@ -4,6 +4,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login", { replace: true });
+  };
   return (
     <nav className="bg-white px-4">
       <div className="flex justify-between mx-auto">
@@ -62,8 +67,9 @@ const Header = () => {
 
           <button
             type="button"
-            className="flex items-center px-2 py-1 text-primary border border-primary bg-white rounded-md hover:bg-primary_shade focus:outline-none "
+            className="flex items-center px-2 py-1 text-primary border border-primary bg-white rounded-md hover:bg-primary_shade focus:outline-none hover:text-white "
             aria-label="toggle profile dropdown"
+            onClick={() => handleLogout()}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

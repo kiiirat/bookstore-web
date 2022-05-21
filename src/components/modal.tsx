@@ -1,4 +1,6 @@
 import { Dialog, Transition } from "@headlessui/react";
+import { cache, client } from "apollo/client";
+import { useDeleteBookMutation } from "generated/graphql";
 import { Dispatch, Fragment, SetStateAction, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Book } from "./booklist";
@@ -10,6 +12,28 @@ type ModalProps = {
 };
 const Modal: React.FC<ModalProps> = ({ isOpen, setIsOpen, book }) => {
   const navigate = useNavigate();
+
+  const [deleteBookMutation, { loading }] = useDeleteBookMutation({
+    onCompleted: () => {
+      setIsOpen(false);
+    },
+    update: (cache) => {
+      let id = book?.id;
+      const normalizedId = cache.identify({ id, __typename: "Book" });
+      cache.evict({ id: normalizedId });
+      cache.gc();
+    },
+  });
+
+  const handleDelete = () => {
+    deleteBookMutation({
+      variables: {
+        where: {
+          id: parseFloat(book?.id as any),
+        },
+      },
+    });
+  };
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
@@ -110,9 +134,18 @@ const Modal: React.FC<ModalProps> = ({ isOpen, setIsOpen, book }) => {
                             navigate(`/edit/${book?.id}`, { state: book })
                           }
                         >
-                          Edit
+                          {!loading ? (
+                            "Edit"
+                          ) : (
+                            <div className="flex justify-center">
+                              <div className="w-6 h-6 border-4 border-t-transparent border-white border-solid rounded-full animate-spin"></div>
+                            </div>
+                          )}
                         </button>
-                        <button className="w-1/2 px-8 py-2 text-xs font-bold text-primary border border-primary uppercase transition-colors duration-200 transform bg-white rounded hover:bg-grey-100 hover:text-primary_shade  focus:outline-none focus:bg-white">
+                        <button
+                          className="w-1/2 px-8 py-2 text-xs font-bold text-primary border border-primary uppercase transition-colors duration-200 transform bg-white rounded hover:bg-grey-100 hover:text-primary_shade  focus:outline-none focus:bg-white"
+                          onClick={() => handleDelete()}
+                        >
                           Delete
                         </button>
                       </div>
