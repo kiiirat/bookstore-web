@@ -63,7 +63,7 @@ const Login = () => {
           <div className="space-y-6 mt-10">
             <div>
               <input
-                className="w-full py-2 px-4  border border-gray-300 rounded-md"
+                className="outline-0 pr-3 border  bg-white h-12 px-3 rounded-md text-sm focus:outline-none w-full border-gray-300 text-gray-500 hover:ring-primary hover:ring-1 hover:border-primary  focus:ring-primary focus:ring-1 focus:border-primary "
                 placeholder="Email Address"
                 {...register("email")}
               />
@@ -75,7 +75,7 @@ const Login = () => {
             </div>
             <div>
               <input
-                className="w-full py-2 px-4  border border-gray-300 rounded-md"
+                className="outline-0 pr-3 border  bg-white h-12 px-3 rounded-md text-sm focus:outline-none w-full border-gray-300 text-gray-500 hover:ring-primary hover:ring-1 hover:border-primary  focus:ring-primary focus:ring-1 focus:border-primary "
                 placeholder="Password"
                 type="password"
                 {...register("password")}

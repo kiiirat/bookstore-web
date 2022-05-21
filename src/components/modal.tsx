@@ -1,7 +1,9 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { cache, client } from "apollo/client";
-import { useDeleteBookMutation } from "generated/graphql";
-import { Dispatch, Fragment, SetStateAction, useState } from "react";
+import {
+  PaginatedBooksDocument,
+  useDeleteBookMutation,
+} from "generated/graphql";
+import { Dispatch, Fragment, SetStateAction } from "react";
 import { useNavigate } from "react-router-dom";
 import { Book } from "./booklist";
 
@@ -17,12 +19,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, setIsOpen, book }) => {
     onCompleted: () => {
       setIsOpen(false);
     },
-    update: (cache) => {
-      let id = book?.id;
-      const normalizedId = cache.identify({ id, __typename: "Book" });
-      cache.evict({ id: normalizedId });
-      cache.gc();
-    },
+    refetchQueries: [PaginatedBooksDocument],
   });
 
   const handleDelete = () => {
