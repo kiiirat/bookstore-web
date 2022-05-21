@@ -17,7 +17,7 @@ const App = () => {
           <Route element={<ProtectedPage />}>
             <Route path="/" element={<BookList />} />
             <Route path="/new" element={<AddBook />} />
-            <Route path="/edit" element={<EditBook />} />s
+            <Route path="/edit/:id" element={<EditBook />} />s
           </Route>
 
           <Route path="/login" element={<Login />} />

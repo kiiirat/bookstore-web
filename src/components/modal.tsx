@@ -106,7 +106,9 @@ const Modal: React.FC<ModalProps> = ({ isOpen, setIsOpen, book }) => {
                       <div className="flex justify-between mt-3 item-center space-x-4 absolute bottom-0">
                         <button
                           className="w-full px-10 py-2 text-xs font-bold text-white uppercase transition-colors duration-200 transform bg-primary rounded  hover:bg-primary_shade  focus:outline-none focus:bg-primary"
-                          onClick={() => navigate("/edit")}
+                          onClick={() =>
+                            navigate(`/edit/${book?.id}`, { state: book })
+                          }
                         >
                           Edit
                         </button>
