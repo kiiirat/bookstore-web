@@ -1,13 +1,29 @@
 import { useState } from "react";
 import Modal from "./modal";
 
-const BookList = () => {
+type BookListProps = {
+  books:
+    | {
+        __typename?: "Book" | undefined;
+        id: number;
+        title: string;
+        author: string;
+        price: number;
+        imageUrl: string;
+        stock: number;
+        createdAt: any;
+        updatedAt: any;
+      }[]
+    | undefined;
+};
+
+const BookList: React.FC<BookListProps> = ({ books }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="space-y-4">
       <div className="w-full ">
         <div className="grid grid-cols-6 gap-4 ">
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((index) => (
+          {books?.map((book, index) => (
             <div
               className="flex flex-col items-center w-4/5 mx-auto transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300"
               key={index}
@@ -15,14 +31,14 @@ const BookList = () => {
             >
               <img
                 className="w-full rounded h-60"
-                src="https://upload.wikimedia.org/wikipedia/commons/1/17/PrideAndPrejudiceTitlePage.jpg"
-                alt="Book"
+                src={book.imageUrl}
+                alt={book.title}
               />
               <div className="w-full ">
                 <h4 className="mt-2 text-lg text-left font-medium text-gray-700  text-ellipsis overflow-hidden truncate">
-                  Pride and Prejudice
+                  {book.title}
                 </h4>
-                <p className="text-primary">$12.55</p>
+                <p className="text-primary">₱ {book.price}</p>
               </div>
             </div>
           ))}

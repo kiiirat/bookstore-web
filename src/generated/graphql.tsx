@@ -908,7 +908,7 @@ export type BookQuery = { __typename?: 'Query', book?: { __typename?: 'Book', id
 export type BooksQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type BooksQuery = { __typename?: 'Query', books: Array<{ __typename?: 'Book', id: number, title: string, author: string, price: number, imageUrl: string, stock: number }> };
+export type BooksQuery = { __typename?: 'Query', books: Array<{ __typename?: 'Book', id: number, title: string, author: string, price: number, imageUrl: string, stock: number, createdAt: any, updatedAt: any }> };
 
 
 export const CreateBookDocument = gql`
@@ -1114,6 +1114,8 @@ export const BooksDocument = gql`
     price
     imageUrl
     stock
+    createdAt
+    updatedAt
   }
 }
     `;
