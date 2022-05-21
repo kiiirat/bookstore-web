@@ -1,12 +1,14 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Dispatch, Fragment, SetStateAction, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Book } from "./booklist";
 
 type ModalProps = {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
+  book: Book | undefined;
 };
-const Modal: React.FC<ModalProps> = ({ isOpen, setIsOpen }) => {
+const Modal: React.FC<ModalProps> = ({ isOpen, setIsOpen, book }) => {
   const navigate = useNavigate();
   return (
     <>
@@ -54,7 +56,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, setIsOpen }) => {
                     <button
                       onClick={() => setIsOpen(false)}
                       type="button"
-                      className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
+                      className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm ml-auto inline-flex items-center focus:outline-none"
                       data-modal-toggle="popup-modal"
                     >
                       <svg
@@ -79,26 +81,26 @@ const Modal: React.FC<ModalProps> = ({ isOpen, setIsOpen }) => {
                     <div className="w-4/5 flex justify-start">
                       <img
                         className="w-full h-80 rounded"
-                        src="https://upload.wikimedia.org/wikipedia/commons/1/17/PrideAndPrejudiceTitlePage.jpg"
+                        src={book?.imageUrl}
                         alt="Book"
                       />
                     </div>
 
                     <div className="w-4/5 px-4 relative">
                       <h1 className="text-3xl font-bold text-gray-800 dark:text-white">
-                        Backpack of The Centuries with Gold
+                        {book?.title}
                       </h1>
 
                       <p className="mt-2 text-md text-gray-600 dark:text-gray-400">
-                        by Jane Austen
+                        by {book?.author}
                       </p>
 
                       <p className="mt-4 text-sm text-gray-600 dark:text-gray-400">
-                        11,100 in stocks
+                        {book?.stock} in stocks
                       </p>
 
                       <h1 className="mt-4 text-lg font-bold text-gray-700 dark:text-gray-200 md:text-xl">
-                        $220
+                        ₱ {book?.price}
                       </h1>
 
                       <div className="flex justify-between mt-3 item-center space-x-4 absolute bottom-0">

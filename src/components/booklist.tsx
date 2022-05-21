@@ -1,24 +1,31 @@
 import { useState } from "react";
 import Modal from "./modal";
 
+export type Book = {
+  __typename?: "Book" | undefined;
+  id: number;
+  title: string;
+  author: string;
+  price: number;
+  imageUrl: string;
+  stock: number;
+  createdAt: any;
+  updatedAt: any;
+};
+
 type BookListProps = {
-  books:
-    | {
-        __typename?: "Book" | undefined;
-        id: number;
-        title: string;
-        author: string;
-        price: number;
-        imageUrl: string;
-        stock: number;
-        createdAt: any;
-        updatedAt: any;
-      }[]
-    | undefined;
+  books: Book[] | undefined;
 };
 
 const BookList: React.FC<BookListProps> = ({ books }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [book, setBook] = useState<Book>();
+  const handleViewBook = (bookId: number) => {
+    const book = books?.find((book) => book.id === bookId);
+    setBook(book);
+    setIsOpen(true);
+  };
+
   return (
     <div className="space-y-4">
       <div className="w-full ">
@@ -27,7 +34,7 @@ const BookList: React.FC<BookListProps> = ({ books }) => {
             <div
               className="flex flex-col items-center w-4/5 mx-auto transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300"
               key={index}
-              onClick={() => setIsOpen(true)}
+              onClick={() => handleViewBook(book.id)}
             >
               <img
                 className="w-full rounded h-60"
@@ -132,7 +139,7 @@ const BookList: React.FC<BookListProps> = ({ books }) => {
           </li>
         </ul>
       </nav>
-      <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
+      <Modal isOpen={isOpen} setIsOpen={setIsOpen} book={book} />
     </div>
   );
 };
